@@ -50,12 +50,12 @@ resource "aws_iam_role_policy_attachment" "lambda_role_policy" {
 data "archive_file" "python_zip_code" {
   type        = "zip"
   source_dir  = "${path.module}/python/"
-  output_path = "${path.module}/python/hello.zip"
+  output_path = "${path.module}/python/cwl_transform.zip"
 }
 
 # Create the lambda function
 resource "aws_lambda_function" "lambda_function" {
-  filename      = "${path.module}/python/hello.zip"
+  filename      = "${path.module}/python/cwl_transform.zip"
   function_name = "Test_Transformation_Function"
   role          = aws_iam_role.lambda_role.arn
   handler       = "cwl_transform.lambda_handler"
